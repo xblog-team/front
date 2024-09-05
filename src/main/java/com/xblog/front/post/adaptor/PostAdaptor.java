@@ -8,9 +8,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public interface PostAdaptor {
-    List<GetPostDto> getPostList(Long partyId);
+    List<GetPostDto> getPostListByViews(Long partyId);
+
+    List<GetPostDto> getPostList(Long categoryId);
 
     GetPostDto getPost(Long postId);
 
