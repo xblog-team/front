@@ -8,10 +8,12 @@ import com.xblog.front.post.dto.ModifyPostResponse;
 import java.util.List;
 
 public interface PostService {
-    List<GetPostDto> getPostList(Long partyId);
+    List<GetPostDto> getPostByViews(Long partyId);
+
+    List<GetPostDto> getPostList(Long categoryId);
 
     GetPostDto getPost(Long postId);
-    
+
     AddPostDto addPost(AddPostDto addPostDto);
 
     ModifyPostResponse modifyPost(ModifyPostRequest request, Long postId);
