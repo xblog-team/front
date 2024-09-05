@@ -1,5 +1,6 @@
-package com.xblog.front.post.adaptor;
+package com.xblog.front.post.adaptor.impl;
 
+import com.xblog.front.post.adaptor.PostAdaptor;
 import com.xblog.front.post.dto.AddPostDto;
 import com.xblog.front.post.dto.GetPostDto;
 import com.xblog.front.post.dto.ModifyPostRequest;
@@ -19,7 +20,7 @@ import java.util.List;
 public class PostAdaptorImpl implements PostAdaptor {
     private final RestTemplate restTemplate;
 
-    @Value("http://localhost:8888")
+    @Value("http://localhost:8090")
     String gatewayDomain;
 
 
@@ -29,13 +30,27 @@ public class PostAdaptorImpl implements PostAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         return headers;
     }
+
     @Override
-    public List<GetPostDto> getPostList(Long partyId) {
+    public List<GetPostDto> getPostListByViews(Long partyId) {
+        HttpHeaders headers = makeHeaders();
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<List<GetPostDto>> exchange = restTemplate.exchange(
+                gatewayDomain + "/api/posts/views/" + partyId,
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<>() {
+                });
+        return exchange.getBody();
+    }
+
+    @Override
+    public List<GetPostDto> getPostList(Long categoryId) {
         HttpHeaders headers = makeHeaders();
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<List<GetPostDto>> exchange = restTemplate.exchange(
-                gatewayDomain + "/api/posts",
+                gatewayDomain + "/api/posts/post-categories/" + categoryId,
                 HttpMethod.GET,
                 entity,
                 new ParameterizedTypeReference<>() {
