@@ -58,7 +58,7 @@
 
                 <ul class="nav nav-pills p-3 mb-3 rounded align-items-center card flex-row">
                     <li class="nav-item">
-                        <a th:href="@{/}" class="
+                        <a th:href="@{/xblog/user/party/{partyId}/views(partyId=${partyId})}" class="
                       nav-link
                      gap-6
                       note-link
@@ -73,9 +73,8 @@
                             <span class="d-none d-md-block font-weight-medium">All Notes</span>
                         </a>
                     </li>
-<!--                    이거는 category를 넣자-->
                     <li class="nav-item"  th:each="category:${categoryList}">
-                        <a th:href="@{/{categoryId}(categoryId=${category.categoryId})}" class="
+                        <a th:href="@{/xblog/user/party/{partyId}/category/{categoryId}(partyId=${partyId},categoryId=${category.categoryId})}" class="
                       nav-link
                     gap-6
                       note-link
@@ -84,13 +83,13 @@
                       justify-content-center
                       px-3 px-md-3
                       me-0 me-md-2 text-body-color
-                    " id="note-business">
+                    " th:id="category${categoryId}">
                             <i class="ti ti-briefcase fill-white"></i>
                             <span class="d-none d-md-block font-weight-medium" th:text="${category.categoryName}"></span>
                         </a>
                     </li>
                     <li class="nav-item ms-auto">
-                        <a href="/post/create" class="btn btn-primary d-flex align-items-center px-3 gap-6" id="add-notes">
+                        <a href="javascript:void(0)" class="btn btn-primary d-flex align-items-center px-3 gap-6" id="add-notes">
                             <i class="ti ti-file fs-4"></i>
                             <span class="d-none d-md-block font-weight-medium fs-3">Add Notes</span>
                         </a>
@@ -122,18 +121,25 @@
                             <div class="modal-body">
                                 <div class="notes-box">
                                     <div class="notes-content">
-                                        <form action="javascript:void(0);" id="addnotesmodalTitle">
+                                        <form th:action="@{/xblog/user/party/{partyId}/post/create(partyId=${partyId})}" method="post" id="addnotesmodalTitle" onsubmit="submitMsg()">
                                             <div class="row">
+<!--                                                <div class="form-group mb-4">-->
+<!--                                                    <label class="mr-sm-2" for="inlineFormCustomSelect">Select</label>-->
+<!--                                                    <select class="form-select mr-sm-2" id="inlineFormCustomSelect">-->
+<!--                                                        <option selected>카테고리를 고르시오</option>-->
+<!--&lt;!&ndash;                                                        <option th:each="category:${categoryList}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>&ndash;&gt;-->
+<!--                                                    </select>-->
+<!--                                                </div>-->
                                                 <div class="col-md-12 mb-3">
                                                     <div class="note-title">
                                                         <label class="form-label">Note Title</label>
-                                                        <input type="text" id="note-has-title" class="form-control" minlength="25" placeholder="Title">
+                                                        <input type="text" id="title" class="form-control" minlength="25" placeholder="Title">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="note-description">
                                                         <label class="form-label">Note Description</label>
-                                                        <textarea id="note-has-description" class="form-control" minlength="60" placeholder="Description" rows="3"></textarea>
+                                                        <textarea id="content" class="form-control" minlength="60" placeholder="Description" rows="3"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -334,5 +340,18 @@
 <script src="/assets/libs/fullcalendar/index.global.min.js"></script>
 <script src="/assets/js/apps/notes.js"></script>
 
+
+<script>
+    function submitMsg() {
+        alert("게시물 업로드가 성공적으로 완료되었습니다.");
+    }
+
+    $("#add-notes").on("click", function (event) {
+        $("#addnotesmodal").modal("show");
+        $("#btn-n-save").hide();
+        $("#btn-n-add").show();
+    });
+
+</script>
 
 </body></html>
