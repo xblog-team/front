@@ -20,19 +20,28 @@ public class PostController {
     private final PostService postService;
     private final CategoryService categoryService;
 
-    @GetMapping("/xblog/uesr/party/{partyId}/posts")
+    private List<GetCategoryDto> getCategoryDtos(Long partyId){
+        return categoryService.getCategoryList(partyId);
+    }
+
+    @GetMapping("/xblog/user/party/{partyId}/posts")
     public String getPosts(@PathVariable Long partyId, Model model) {
-        List<GetCategoryDto> categoryList = categoryService.getCategoryList(partyId);
+        List<GetCategoryDto> categoryList = getCategoryDtos(partyId);
         List<GetPostDto> postList = postService.getPostByViews(partyId);
 
+        model.addAttribute("partyId", partyId);
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("postList", postList);
         return "/user/post";
     }
 
-    @GetMapping("/{categoryId}")
-    public String getPostByCategory(@PathVariable Long categoryId, Model model) {
+    @GetMapping("/xblog/user/party/{partyId}/category/{categoryId}")
+    public String getPostByCategory(@PathVariable Long partyId, @PathVariable Long categoryId, Model model) {
+        List<GetCategoryDto> categoryList = getCategoryDtos(partyId);
         List<GetPostDto> postList = postService.getPostList(categoryId);
+
+        model.addAttribute("partyId", partyId);
+        model.addAttribute("categoryList", categoryList);
         model.addAttribute("postList", postList);
         return "/user/post";
     }
@@ -45,12 +54,12 @@ public class PostController {
     }
 
     @GetMapping("/post/create")
-    public String createPost() {
+    public String createPost(AddPostDto addPostDto) {
         return "/postMaker";
     }
 
-    @PostMapping("/xblog/user/party/{partyName}/post/create")
-    public String postPost(AddPostDto addPostDto, Model model){
+    @PostMapping("/xblog/user/party/{partyId}/post/create")
+    public String createPost(AddPostDto addPostDto, Model model){
         AddPostDto dto = postService.addPost(addPostDto);
         model.addAttribute("post", dto);
         return "";
