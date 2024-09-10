@@ -58,14 +58,13 @@
 
                 <ul class="nav nav-pills p-3 mb-3 rounded align-items-center card flex-row">
                     <li class="nav-item">
-                        <a th:href="@{/xblog/user/party/{partyId}/views(partyId=${partyId})}" class="
+                        <a th:href="@{/xblog/user/party/{partyId}/posts(partyId=${partyId})}" class="
                       nav-link
                      gap-6
                       note-link
                       d-flex
                       align-items-center
                       justify-content-center
-                      active
                       px-3 px-md-3
                       me-0 me-md-2 text-body-color
                     " id="all-category">
@@ -83,7 +82,7 @@
                       justify-content-center
                       px-3 px-md-3
                       me-0 me-md-2 text-body-color
-                    " th:id="category${categoryId}">
+                    " th:id="category+${categoryId}">
                             <i class="ti ti-briefcase fill-white"></i>
                             <span class="d-none d-md-block font-weight-medium" th:text="${category.categoryName}"></span>
                         </a>
@@ -341,17 +340,41 @@
 <script src="/assets/js/apps/notes.js"></script>
 
 
-<script>
+<script defer>
     function submitMsg() {
         alert("게시물 업로드가 성공적으로 완료되었습니다.");
     }
 
-    $("#add-notes").on("click", function (event) {
+    $("#add-notes").on("click", function () {
         $("#addnotesmodal").modal("show");
         $("#btn-n-save").hide();
         $("#btn-n-add").show();
     });
 
+</script>
+<script defer>
+    ulQuery = document.querySelector("ul");
+    console.log(ulQuery);
+
+    liQuerys = ulQuery.querySelectorAll("li");
+    console.log("liQuerys: " + liQuerys);
+
+    liQuerys.forEach(liQuery => {
+        let liChild = liQuery.firstElementChild;
+        console.log('li : ' +liQuery.firstElementChild.classList);
+        // if(liQuery.classList.contains('active')) {
+        //     console.log('active remove');
+        //     liQuery.classList.remove('active');
+        // }
+        liQuery.addEventListener('click', function () {
+            console.log('click : ' +liQuery);
+
+            liQuery.firstElementChild.classList.add('active');
+            // if (!liChild.classList.contains('active')) {
+            //     console.log('active add');
+            // }
+        });
+    })
 </script>
 
 </body></html>
