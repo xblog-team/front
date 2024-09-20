@@ -9,9 +9,18 @@
     <link rel="shortcut icon" type="image/png" href="/assets/images/logos/favicon.png">
 
     <!-- Core Css -->
-    <style data-fullcalendar=""></style><link rel="stylesheet" href="/assets/css/styles.css">
+    <style data-fullcalendar=""></style>
+    <link rel="stylesheet" href="/assets/css/styles.css">
 
     <title>Modernize Bootstrap Admin</title>
+    <style>
+        .note-inner-content{
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: calc(100%);
+            white-space: nowrap;
+        }
+    </style>
 </head>
 
 <body data-sidebartype="mini-sidebar">
@@ -103,7 +112,17 @@
                                     <h6 class="note-title text-truncate w-75 mb-0" th:text="${post.title}" data-noteheading="title"></h6>
                                     <!--                                <p class="note-date fs-2">11 March 2009</p>-->
                                     <div class="note-content">
-                                        <p class="note-inner-content" th:text="${post.content}"></p>
+                                        <p class="note-inner-content" style="text-overflow: ellipsis; -webkit-line-clamp: 1" th:text="${post.content}"></p>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i class="ti ti-eye text-dark fs-5"></i>
+                                            <span th:text="${post.views}">35</span>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+<!--                                            <i class="ti ti-message-2 text-dark fs-5"></i>-->
+<!--                                            <span th:text="${commentList.size()}"/>-->
+                                        </div>
                                     </div>
                                 </a>
                             </div>
@@ -160,171 +179,8 @@
             </div>
         </div>
     </div>
-
-    <!--  Search Bar -->
-<!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">-->
-<!--        <div class="modal-dialog modal-dialog-scrollable modal-lg">-->
-<!--            <div class="modal-content rounded-1">-->
-<!--                <div class="modal-header border-bottom">-->
-<!--                    <input type="search" class="form-control fs-3" placeholder="Search here" id="search">-->
-<!--                    <a href="javascript:void(0)" data-bs-dismiss="modal" class="lh-1">-->
-<!--                        <i class="ti ti-x fs-5 ms-3"></i>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <div class="modal-body message-body" data-simplebar="init"><div class="simplebar-wrapper" style="margin: -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow: hidden;"><div class="simplebar-content" style="padding: 16px;">-->
-<!--                    <h5 class="mb-0 fs-5 p-1">Quick Page Links</h5>-->
-<!--                    <ul class="list mb-0 py-2">-->
-<!--                        <li class="p-1 mb-1 bg-hover-light-black">-->
-<!--                            <a href="#">-->
-<!--                                <span class="fs-3 text-dark fw-normal d-block">Modern</span>-->
-<!--                                <span class="fs-3 text-muted d-block">/dashboards/dashboard1</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="p-1 mb-1 bg-hover-light-black">-->
-<!--                            <a href="#">-->
-<!--                                <span class="fs-3 text-dark fw-normal d-block">Dashboard</span>-->
-<!--                                <span class="fs-3 text-muted d-block">/dashboards/dashboard2</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="p-1 mb-1 bg-hover-light-black">-->
-<!--                            <a href="#">-->
-<!--                                <span class="fs-3 text-dark fw-normal d-block">Contacts</span>-->
-<!--                                <span class="fs-3 text-muted d-block">/apps/contacts</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="p-1 mb-1 bg-hover-light-black">-->
-<!--                            <a href="#">-->
-<!--                                <span class="fs-3 text-dark fw-normal d-block">Posts</span>-->
-<!--                                <span class="fs-3 text-muted d-block">/apps/blog/posts</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="p-1 mb-1 bg-hover-light-black">-->
-<!--                            <a href="#">-->
-<!--                                <span class="fs-3 text-dark fw-normal d-block">Detail</span>-->
-<!--                                <span class="fs-3 text-muted d-block">/apps/blog/detail/streaming-video-way-before-it-was-cool-go-dark-tomorrow</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="p-1 mb-1 bg-hover-light-black">-->
-<!--                            <a href="#">-->
-<!--                                <span class="fs-3 text-dark fw-normal d-block">Shop</span>-->
-<!--                                <span class="fs-3 text-muted d-block">/apps/ecommerce/shop</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="p-1 mb-1 bg-hover-light-black">-->
-<!--                            <a href="#">-->
-<!--                                <span class="fs-3 text-dark fw-normal d-block">Modern</span>-->
-<!--                                <span class="fs-3 text-muted d-block">/dashboards/dashboard1</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="p-1 mb-1 bg-hover-light-black">-->
-<!--                            <a href="#">-->
-<!--                                <span class="fs-3 text-dark fw-normal d-block">Dashboard</span>-->
-<!--                                <span class="fs-3 text-muted d-block">/dashboards/dashboard2</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="p-1 mb-1 bg-hover-light-black">-->
-<!--                            <a href="#">-->
-<!--                                <span class="fs-3 text-dark fw-normal d-block">Contacts</span>-->
-<!--                                <span class="fs-3 text-muted d-block">/apps/contacts</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="p-1 mb-1 bg-hover-light-black">-->
-<!--                            <a href="#">-->
-<!--                                <span class="fs-3 text-dark fw-normal d-block">Posts</span>-->
-<!--                                <span class="fs-3 text-muted d-block">/apps/blog/posts</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="p-1 mb-1 bg-hover-light-black">-->
-<!--                            <a href="#">-->
-<!--                                <span class="fs-3 text-dark fw-normal d-block">Detail</span>-->
-<!--                                <span class="fs-3 text-muted d-block">/apps/blog/detail/streaming-video-way-before-it-was-cool-go-dark-tomorrow</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="p-1 mb-1 bg-hover-light-black">-->
-<!--                            <a href="#">-->
-<!--                                <span class="fs-3 text-dark fw-normal d-block">Shop</span>-->
-<!--                                <span class="fs-3 text-muted d-block">/apps/ecommerce/shop</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </div></div></div></div><div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 0px; display: none;"></div></div></div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-    <!--  Shopping Cart -->
-<!--    <div class="offcanvas offcanvas-end shopping-cart" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">-->
-<!--        <div class="offcanvas-header justify-content-between py-4">-->
-<!--            <h5 class="offcanvas-title fs-5 fw-semibold" id="offcanvasRightLabel">-->
-<!--                Shopping Cart-->
-<!--            </h5>-->
-<!--            <span class="badge bg-primary rounded-4 px-3 py-1 lh-sm">5 new</span>-->
-<!--        </div>-->
-<!--        <div class="offcanvas-body h-100 px-4 pt-0" data-simplebar="init"><div class="simplebar-wrapper" style="margin: 0px -24px -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden;"><div class="simplebar-content" style="padding: 0px 24px 16px;">-->
-<!--            <ul class="mb-0">-->
-<!--                <li class="pb-7">-->
-<!--                    <div class="d-flex align-items-center">-->
-<!--                        <img src="/assets/images/products/product-1.jpg" width="95" height="75" class="rounded-1 me-9 flex-shrink-0" alt="">-->
-<!--                        <div>-->
-<!--                            <h6 class="mb-1">Supreme toys cooker</h6>-->
-<!--                            <p class="mb-0 text-muted fs-2">Kitchenware Item</p>-->
-<!--                            <div class="d-flex align-items-center justify-content-between mt-2">-->
-<!--                                <h6 class="fs-2 fw-semibold mb-0 text-muted">$250</h6>-->
-<!--                                <div class="input-group input-group-sm w-50">-->
-<!--                                    <button class="btn border-0 round-20 minus p-0 bg-success-subtle text-success" type="button" id="add1">-->
-<!--                                        - -->
-<!--                                    </button>-->
-<!--                                    <input type="text" class="form-control round-20 bg-transparent text-muted fs-2 border-0 text-center qty" placeholder="" aria-label="Example text with button addon" aria-describedby="add1" value="1">-->
-<!--                                    <button class="btn text-success bg-success-subtle p-0 round-20 border-0 add" type="button" id="addo2">-->
-<!--                                        +-->
-<!--                                    </button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--                <li class="pb-7">-->
-<!--                    <div class="d-flex align-items-center">-->
-<!--                        <img src="/assets/images/products/product-2.jpg" width="95" height="75" class="rounded-1 me-9 flex-shrink-0" alt="">-->
-<!--                        <div>-->
-<!--                            <h6 class="mb-1">Supreme toys cooker</h6>-->
-<!--                            <p class="mb-0 text-muted fs-2">Kitchenware Item</p>-->
-<!--                            <div class="d-flex align-items-center justify-content-between mt-2">-->
-<!--                                <h6 class="fs-2 fw-semibold mb-0 text-muted">$250</h6>-->
-<!--                                <div class="input-group input-group-sm w-50">-->
-<!--                                    <button class="btn border-0 round-20 minus p-0 bg-success-subtle text-success" type="button" id="add2">-->
-<!--                                        - -->
-<!--                                    </button>-->
-<!--                                    <input type="text" class="form-control round-20 bg-transparent text-muted fs-2 border-0 text-center qty" placeholder="" aria-label="Example text with button addon" aria-describedby="add2" value="1">-->
-<!--                                    <button class="btn text-success bg-success-subtle p-0 round-20 border-0 add" type="button" id="addon34">-->
-<!--                                        +-->
-<!--                                    </button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--            <div class="align-bottom">-->
-<!--                <div class="d-flex align-items-center pb-7">-->
-<!--                    <span class="text-dark fs-3">Sub Total</span>-->
-<!--                    <div class="ms-auto">-->
-<!--                        <span class="text-dark fw-semibold fs-3">$2530</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="d-flex align-items-center pb-7">-->
-<!--                    <span class="text-dark fs-3">Total</span>-->
-<!--                    <div class="ms-auto">-->
-<!--                        <span class="text-dark fw-semibold fs-3">$6830</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <a href="/main/eco-checkout.html" class="btn btn-outline-primary w-100">Go to shopping cart</a>-->
-<!--            </div>-->
-<!--        </div></div></div></div><div class="simplebar-placeholder" style="width: 330px; height: 470px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 0px; display: none;"></div></div></div>-->
-<!--    </div>-->
-
-
 </div>
+
 <!--<div class="dark-transparent sidebartoggler"></div>-->
 <script src="/assets/js/vendor.min.js"></script>
 <!-- Import Js Files -->
