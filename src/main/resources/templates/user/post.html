@@ -9,7 +9,6 @@
     <link rel="shortcut icon" type="image/png" href="/assets/images/logos/favicon.png">
 
     <!-- Core Css -->
-    <style data-fullcalendar=""></style>
     <link rel="stylesheet" href="/assets/css/styles.css">
 
     <title>Modernize Bootstrap Admin</title>
@@ -145,7 +144,7 @@
                                                 <div class="form-group mb-4">
                                                     <label class="mr-sm-2" for="inlineFormCustomSelect">Select</label>
                                                     <select class="form-select mr-sm-2" id="inlineFormCustomSelect">
-                                                        <option selected>카테고리를 고르시오</option>
+                                                        <option selected disabled>카테고리를 고르시오</option>
                                                         <option th:each="category:${categoryList}" th:value="${category.categoryId}" th:text="${category.categoryName}">카테고리를 고르시오</option>
                                                     </select>
                                                 </div>
@@ -171,7 +170,6 @@
                                     <button class="btn bg-danger-subtle text-danger" data-bs-dismiss="modal">Discard</button>
                                     <button id="btn-n-add" class="btn btn-primary" disabled="disabled" form="addnotesmodalForm">Add</button>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -223,42 +221,39 @@
 
     $("#add-notes").on("click", function () {
         $("#addnotesmodal").modal("show");
-        $("#btn-n-save").hide();
+        // $("#btn-n-save").hide();
         $("#btn-n-add").show();
     });
-
 </script>
 <script defer>
-    liQuery = document.querySelectorAll('.nav-item');
+        ulQuery = document.querySelector("ul");
+        console.log(ulQuery);
 
-        // ulQuery = document.querySelector("ul");
-        // console.log(ulQuery);
-        //
-        // liQuerys = ulQuery.querySelectorAll("li");
-        // console.log("liQuerys: " + liQuerys);
-        //
-        // liQuerys.forEach(liQuery => {
-        //     // let liChild = liQuery.firstElementChild;
-        //     console.log('li : ' +liQuery.firstElementChild.classList);
-        //     // if(liQuery.classList.contains('active')) {
-        //     //     console.log('active remove');
-        //     //     liQuery.classList.remove('active');
-        //     // }
-        //     liQuery.addEventListener('click', function () {
-        //         console.log('click : ' +liQuery);
-        //         try {
-        //             // liQuery.forEach(li => li.firstElementChild.classList.remove('active'));
-        //             console.log(liQuery.firstElementChild.classList)
-        //             liQuery.firstElementChild.classList.add('active');
-        //             console.log(liQuery.firstElementChild.classList);
-        //         } catch (e) {
-        //             console.log(e);
-        //         }
-        //         // if (!liChild.classList.contains('active')) {
-        //         //     console.log('active add');
-        //         // }
-        //     });
-        // })
+        liQuerys = ulQuery.querySelectorAll("li");
+        console.log("liQuerys: " + liQuerys);
+
+        liQuerys.forEach(liQuery => {
+            // let liChild = liQuery.firstElementChild;
+            console.log('li : ' +liQuery.firstElementChild.classList);
+            // if(liQuery.classList.contains('active')) {
+            //     console.log('active remove');
+            //     liQuery.classList.remove('active');
+            // }
+            liQuery.addEventListener('click', function () {
+                console.log('click : ' +liQuery);
+                try {
+                    // liQuery.forEach(li => li.firstElementChild.classList.remove('active'));
+                    console.log(liQuery.firstElementChild.classList)
+                    liQuery.firstElementChild.classList.add('active');
+                    console.log(liQuery.firstElementChild.classList);
+                } catch (e) {
+                    console.log(e);
+                }
+                // if (!liChild.classList.contains('active')) {
+                //     console.log('active add');
+                // }
+            });
+        })
 </script>
 
 </body></html>
