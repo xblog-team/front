@@ -1,0 +1,359 @@
+<!--<!DOCTYPE html>-->
+<html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="horizontal" data-boxed-layout="boxed" data-card="shadow"
+      xmlns:th="http://www.thymeleaf.org"><head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon icon-->
+  <link rel="shortcut icon" type="image/png" href="/assets/images/logos/favicon.png">
+
+  <!-- Core Css -->
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <title>Modernize Bootstrap Admin</title>
+</head>
+
+<body data-sidebartype="mini-sidebar">
+<div class="toast toast-onload align-items-center text-bg-primary border-0 fade hide" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-body hstack align-items-start gap-6">
+    <i class="ti ti-alert-circle fs-6"></i>
+    <div>
+      <h5 class="text-white fs-3 mb-1">Welcome to Modernize</h5>
+      <h6 class="text-white fs-2 mb-0">Easy to costomize the Template!!!</h6>
+    </div>
+    <button type="button" class="btn-close btn-close-white fs-2 m-0 ms-auto shadow-none" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+<!-- Preloader -->
+<div class="preloader" style="display: none;">
+  <img src="/assets/images/logos/favicon.png" alt="loader" class="lds-ripple img-fluid">
+</div>
+<div id="main-wrapper">
+  <div class="page-wrapper">
+    <div style="padding-top: 100px">
+      <div class="container-fluid">
+        <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
+          <div class="card-body px-4 py-3">
+            <div class="row align-items-center">
+              <div class="col-9">
+                <h4 class="fw-semibold mb-8">Post</h4>
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a class="text-muted text-decoration-none" th:href="@{/xblog/user/party/{partyId}/posts(partyId = ${partyId})}">Home</a>
+                    </li>
+<!--                    <li class="breadcrumb-item" aria-current="page"></li>-->
+                  </ol>
+                </nav>
+              </div>
+              <div class="col-3">
+                <div class="text-center mb-n5">
+                  <img src="/assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card rounded-2 overflow-hidden">
+
+          <div class="card-body p-4">
+            <span class="badge text-bg-light fs-2 rounded-4 py-1 px-2" th:text="'<'+${category.categoryName}+'>'"></span>
+            <h2 class="fs-9 fw-semibold my-4" th:text="${post.title}"></h2>
+            <div class="d-flex align-items-center gap-4">
+              <div class="d-flex align-items-center gap-2">
+                <i class="ti ti-eye text-dark fs-5"></i>
+                <span th:text="${post.views}">35</span>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <i class="ti ti-message-2 text-dark fs-5"></i>
+                <span th:text="${commentList.size()}"/>
+              </div>
+            </div>
+          </div>
+          <div class="card-body border-top p-4">
+<!--            <h2 class="fs-8 fw-semibold mb-3">Title of the paragraph</h2>-->
+            <p class="mb-3" th:text="${post.content}">
+            </p>
+<!--            <p class="mb-3">-->
+<!--              Gigure out what it is or what it can do. MTA web directory is the simplest way in which one can bid on a-->
+<!--              link, or a few links if they wish to do so. The link directory on MTA-->
+<!--            </p>-->
+<!--            <p class="text-dark mb-0"><strong>This is strong text.</strong></p>-->
+<!--            <p class="mb-0"><em>This is italic text.</em></p>-->
+<!--            <div class="border-top mt-7 pt-7">-->
+<!--              <h3 class="fw-semibold">Unorder list.</h3>-->
+<!--              <ul class="my-3 ps-4 text-dark">-->
+<!--                <li class="d-flex align-items-center gap-2"><span class="p-1 text-bg-dark rounded-circle"></span>-->
+<!--                  Gigure-->
+<!--                  out what it is or</li>-->
+<!--                <li class="d-flex align-items-center gap-2"><span class="p-1 text-bg-dark rounded-circle"></span> The-->
+<!--                  links-->
+<!--                  it currently</li>-->
+<!--                <li class="d-flex align-items-center gap-2"><span class="p-1 text-bg-dark rounded-circle"></span> It-->
+<!--                  allows-->
+<!--                  you to start your bid</li>-->
+<!--                <li class="d-flex align-items-center gap-2"><span class="p-1 text-bg-dark rounded-circle"></span>-->
+<!--                  Gigure-->
+<!--                  out what it is or</li>-->
+<!--                <li class="d-flex align-items-center gap-2"><span class="p-1 text-bg-dark rounded-circle"></span> The-->
+<!--                  links-->
+<!--                  it currently</li>-->
+<!--                <li class="d-flex align-items-center gap-2"><span class="p-1 text-bg-dark rounded-circle"></span> It-->
+<!--                  allows-->
+<!--                  you to start your bid</li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--            <div class="border-top mt-7 pt-7">-->
+<!--              <h3 class="fw-semibold">Order list.</h3>-->
+<!--              <ol class="my-3 text-dark">-->
+<!--                <li>Gigure out what it is or</li>-->
+<!--                <li>The links it currently</li>-->
+<!--                <li>It allows you to start your bid</li>-->
+<!--                <li>Gigure out what it is or</li>-->
+<!--                <li>The links it currently</li>-->
+<!--                <li>It allows you to start your bid</li>-->
+<!--              </ol>-->
+<!--            </div>-->
+<!--            <div class="border-top mt-7 pt-7">-->
+<!--              <h3 class="fw-semibold">Quotes</h3>-->
+<!--              <div class="p-3 bg-light rounded border-start border-2 border-primary">-->
+<!--                <h6 class="mb-0 fs-4 fw-semibold"><i class="ti ti-quote fs-7"></i>Life is short, Smile while you still-->
+<!--                  have teeth!</h6>-->
+<!--              </div>-->
+<!--            </div>-->
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h4 class="mb-4 fw-semibold">Post Comments</h4>
+            <form method="post" th:action="@{/xblog/user/party/{partyId}/posts/{postId}/comment(partyId = ${partyId}, postId = ${postId})}">
+              <textarea class="form-control mb-4" rows="5"></textarea>
+              <button class="btn btn-primary">Post Comment</button>
+            </form>
+            <div class="d-flex align-items-center gap-3 mb-4 mt-7 pt-8">
+              <h4 class="mb-0 fw-semibold">Comments</h4>
+              <span class="badge bg-primary-subtle text-primary fs-4 fw-semibold px-6 py-8 rounded" th:text="${commentList.size()}"></span>
+            </div>
+            <div class="position-relative">
+              <div class="p-4 rounded-2 text-bg-light mb-3" th:each="comment:${commentList}">
+                <div class="d-flex align-items-center gap-3">
+<!--                  <img src="/assets/images/profile/user-3.jpg" alt="" class="rounded-circle" width="33" height="33">-->
+                  <h6 class="fw-semibold mb-0 fs-4" th:text="${comment.userId}"></h6>
+                  <span class="p-1 text-bg-muted rounded-circle d-inline-block"></span>
+                </div>
+                <p class="my-3" th:text="${comment.comment}"></p>
+<!--                <div class="d-flex align-items-center gap-2">-->
+<!--                  <a class="d-flex align-items-center justify-content-center text-bg-primary p-2 fs-4 rounded-circle" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Reply">-->
+<!--                    <i class="ti ti-arrow-back-up"></i>-->
+<!--                  </a>-->
+<!--                </div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  Search Bar -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content rounded-1">
+        <div class="modal-header border-bottom">
+          <input type="search" class="form-control fs-3" placeholder="Search here" id="search">
+          <a href="javascript:void(0)" data-bs-dismiss="modal" class="lh-1">
+            <i class="ti ti-x fs-5 ms-3"></i>
+          </a>
+        </div>
+        <div class="modal-body message-body" data-simplebar="init"><div class="simplebar-wrapper" style="margin: -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow: hidden;"><div class="simplebar-content" style="padding: 16px;">
+          <h5 class="mb-0 fs-5 p-1">Quick Page Links</h5>
+          <ul class="list mb-0 py-2">
+            <li class="p-1 mb-1 bg-hover-light-black">
+              <a href="#">
+                <span class="fs-3 text-dark fw-normal d-block">Modern</span>
+                <span class="fs-3 text-muted d-block">/dashboards/dashboard1</span>
+              </a>
+            </li>
+            <li class="p-1 mb-1 bg-hover-light-black">
+              <a href="#">
+                <span class="fs-3 text-dark fw-normal d-block">Dashboard</span>
+                <span class="fs-3 text-muted d-block">/dashboards/dashboard2</span>
+              </a>
+            </li>
+            <li class="p-1 mb-1 bg-hover-light-black">
+              <a href="#">
+                <span class="fs-3 text-dark fw-normal d-block">Contacts</span>
+                <span class="fs-3 text-muted d-block">/apps/contacts</span>
+              </a>
+            </li>
+            <li class="p-1 mb-1 bg-hover-light-black">
+              <a href="#">
+                <span class="fs-3 text-dark fw-normal d-block">Posts</span>
+                <span class="fs-3 text-muted d-block">/apps/blog/posts</span>
+              </a>
+            </li>
+            <li class="p-1 mb-1 bg-hover-light-black">
+              <a href="#">
+                <span class="fs-3 text-dark fw-normal d-block">Detail</span>
+                <span class="fs-3 text-muted d-block">/apps/blog/detail/streaming-video-way-before-it-was-cool-go-dark-tomorrow</span>
+              </a>
+            </li>
+            <li class="p-1 mb-1 bg-hover-light-black">
+              <a href="#">
+                <span class="fs-3 text-dark fw-normal d-block">Shop</span>
+                <span class="fs-3 text-muted d-block">/apps/ecommerce/shop</span>
+              </a>
+            </li>
+            <li class="p-1 mb-1 bg-hover-light-black">
+              <a href="#">
+                <span class="fs-3 text-dark fw-normal d-block">Modern</span>
+                <span class="fs-3 text-muted d-block">/dashboards/dashboard1</span>
+              </a>
+            </li>
+            <li class="p-1 mb-1 bg-hover-light-black">
+              <a href="#">
+                <span class="fs-3 text-dark fw-normal d-block">Dashboard</span>
+                <span class="fs-3 text-muted d-block">/dashboards/dashboard2</span>
+              </a>
+            </li>
+            <li class="p-1 mb-1 bg-hover-light-black">
+              <a href="#">
+                <span class="fs-3 text-dark fw-normal d-block">Contacts</span>
+                <span class="fs-3 text-muted d-block">/apps/contacts</span>
+              </a>
+            </li>
+            <li class="p-1 mb-1 bg-hover-light-black">
+              <a href="#">
+                <span class="fs-3 text-dark fw-normal d-block">Posts</span>
+                <span class="fs-3 text-muted d-block">/apps/blog/posts</span>
+              </a>
+            </li>
+            <li class="p-1 mb-1 bg-hover-light-black">
+              <a href="#">
+                <span class="fs-3 text-dark fw-normal d-block">Detail</span>
+                <span class="fs-3 text-muted d-block">/apps/blog/detail/streaming-video-way-before-it-was-cool-go-dark-tomorrow</span>
+              </a>
+            </li>
+            <li class="p-1 mb-1 bg-hover-light-black">
+              <a href="#">
+                <span class="fs-3 text-dark fw-normal d-block">Shop</span>
+                <span class="fs-3 text-muted d-block">/apps/ecommerce/shop</span>
+              </a>
+            </li>
+          </ul>
+        </div></div></div></div><div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 0px; display: none;"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!--  Shopping Cart -->
+  <div class="offcanvas offcanvas-end shopping-cart" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header justify-content-between py-4">
+      <h5 class="offcanvas-title fs-5 fw-semibold" id="offcanvasRightLabel">
+        Shopping Cart
+      </h5>
+      <span class="badge bg-primary rounded-4 px-3 py-1 lh-sm">5 new</span>
+    </div>
+    <div class="offcanvas-body h-100 px-4 pt-0" data-simplebar="init"><div class="simplebar-wrapper" style="margin: 0px -24px -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden;"><div class="simplebar-content" style="padding: 0px 24px 16px;">
+      <ul class="mb-0">
+        <li class="pb-7">
+          <div class="d-flex align-items-center">
+            <img src="/assets/images/products/product-1.jpg" width="95" height="75" class="rounded-1 me-9 flex-shrink-0" alt="">
+            <div>
+              <h6 class="mb-1">Supreme toys cooker</h6>
+              <p class="mb-0 text-muted fs-2">Kitchenware Item</p>
+              <div class="d-flex align-items-center justify-content-between mt-2">
+                <h6 class="fs-2 fw-semibold mb-0 text-muted">$250</h6>
+                <div class="input-group input-group-sm w-50">
+                  <button class="btn border-0 round-20 minus p-0 bg-success-subtle text-success" type="button" id="add1">
+                    -
+                  </button>
+                  <input type="text" class="form-control round-20 bg-transparent text-muted fs-2 border-0 text-center qty" placeholder="" aria-label="Example text with button addon" aria-describedby="add1" value="1">
+                  <button class="btn text-success bg-success-subtle p-0 round-20 border-0 add" type="button" id="addo2">
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="pb-7">
+          <div class="d-flex align-items-center">
+            <img src="/assets/images/products/product-2.jpg" width="95" height="75" class="rounded-1 me-9 flex-shrink-0" alt="">
+            <div>
+              <h6 class="mb-1">Supreme toys cooker</h6>
+              <p class="mb-0 text-muted fs-2">Kitchenware Item</p>
+              <div class="d-flex align-items-center justify-content-between mt-2">
+                <h6 class="fs-2 fw-semibold mb-0 text-muted">$250</h6>
+                <div class="input-group input-group-sm w-50">
+                  <button class="btn border-0 round-20 minus p-0 bg-success-subtle text-success" type="button" id="add2">
+                    -
+                  </button>
+                  <input type="text" class="form-control round-20 bg-transparent text-muted fs-2 border-0 text-center qty" placeholder="" aria-label="Example text with button addon" aria-describedby="add2" value="1">
+                  <button class="btn text-success bg-success-subtle p-0 round-20 border-0 add" type="button" id="addon34">
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="pb-7">
+          <div class="d-flex align-items-center">
+            <img src="/assets/images/products/product-3.jpg" width="95" height="75" class="rounded-1 me-9 flex-shrink-0" alt="">
+            <div>
+              <h6 class="mb-1">Supreme toys cooker</h6>
+              <p class="mb-0 text-muted fs-2">Kitchenware Item</p>
+              <div class="d-flex align-items-center justify-content-between mt-2">
+                <h6 class="fs-2 fw-semibold mb-0 text-muted">$250</h6>
+                <div class="input-group input-group-sm w-50">
+                  <button class="btn border-0 round-20 minus p-0 bg-success-subtle text-success" type="button" id="add3">
+                    -
+                  </button>
+                  <input type="text" class="form-control round-20 bg-transparent text-muted fs-2 border-0 text-center qty" placeholder="" aria-label="Example text with button addon" aria-describedby="add3" value="1">
+                  <button class="btn text-success bg-success-subtle p-0 round-20 border-0 add" type="button" id="addon3">
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="align-bottom">
+        <div class="d-flex align-items-center pb-7">
+          <span class="text-dark fs-3">Sub Total</span>
+          <div class="ms-auto">
+            <span class="text-dark fw-semibold fs-3">$2530</span>
+          </div>
+        </div>
+        <div class="d-flex align-items-center pb-7">
+          <span class="text-dark fs-3">Total</span>
+          <div class="ms-auto">
+            <span class="text-dark fw-semibold fs-3">$6830</span>
+          </div>
+        </div>
+        <a href="../horizontal/eco-checkout.html" class="btn btn-outline-primary w-100">Go to shopping cart</a>
+      </div>
+    </div></div></div></div><div class="simplebar-placeholder" style="width: 330px; height: 470px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 0px; display: none;"></div></div></div>
+  </div>
+
+
+</div>
+<div class="dark-transparent sidebartoggler"></div>
+<!-- Import Js Files -->
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/libs/simplebar/dist/simplebar.min.js"></script>
+<script src="/assets/js/theme/app.horizontal.init.js"></script>
+<script src="/assets/js/theme/theme.js"></script>
+<script src="/assets/js/theme/app.min.js"></script>
+<script src="/assets/js/theme/sidebarmenu.js"></script>
+
+<!-- solar icons -->
+<script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+
+</body></html>
