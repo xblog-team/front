@@ -36,7 +36,7 @@ public class PostAdaptorImpl implements PostAdaptor {
         HttpHeaders headers = makeHeaders();
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<List<GetPostDto>> exchange = restTemplate.exchange(
-                gatewayDomain + "/api/posts/views/" + partyId,
+                gatewayDomain + "/api/posts/all/" + partyId,
                 HttpMethod.GET,
                 entity,
                 new ParameterizedTypeReference<>() {
@@ -64,13 +64,11 @@ public class PostAdaptorImpl implements PostAdaptor {
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<GetPostDto> exchange = restTemplate.exchange(
-                gatewayDomain + "/api/post/" + postId,
+                gatewayDomain + "/api/posts/" + postId,
                 HttpMethod.GET,
                 entity,
                 new ParameterizedTypeReference<>() {});
-
-
-        return null;
+        return exchange.getBody();
     }
 
     @Override
@@ -78,7 +76,7 @@ public class PostAdaptorImpl implements PostAdaptor {
         HttpHeaders headers = makeHeaders();
         HttpEntity<AddPostDto> entity = new HttpEntity<>(addPostDto, headers);
         ResponseEntity<AddPostDto> exchange = restTemplate.exchange(
-                gatewayDomain + "/api/post",
+                gatewayDomain + "/api/posts",
                 HttpMethod.POST,
                 entity,
                 new ParameterizedTypeReference<>() {}
@@ -91,7 +89,7 @@ public class PostAdaptorImpl implements PostAdaptor {
         HttpHeaders headers = makeHeaders();
         HttpEntity<ModifyPostRequest> entity = new HttpEntity<>(request, headers);
         ResponseEntity<ModifyPostResponse> exchange = restTemplate.exchange(
-                gatewayDomain + "/api/post/" + postId,
+                gatewayDomain + "/api/posts/" + postId,
                 HttpMethod.PUT,
                 entity,
                 new ParameterizedTypeReference<>() {}
@@ -104,7 +102,7 @@ public class PostAdaptorImpl implements PostAdaptor {
         HttpHeaders headers = makeHeaders();
         HttpEntity<String> entity = new HttpEntity<>(headers);
         restTemplate.exchange(
-                gatewayDomain + "/api/post/" + postId,
+                gatewayDomain + "/api/posts/" + postId,
                 HttpMethod.DELETE,
                 entity,
                 new ParameterizedTypeReference<>() {}
