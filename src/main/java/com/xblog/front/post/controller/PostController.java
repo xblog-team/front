@@ -2,6 +2,8 @@ package com.xblog.front.post.controller;
 
 import com.xblog.front.category.dto.GetCategoryDto;
 import com.xblog.front.category.service.CategoryService;
+import com.xblog.front.comment.dto.GetCommentDto;
+import com.xblog.front.comment.service.CommentService;
 import com.xblog.front.post.dto.AddPostDto;
 import com.xblog.front.post.dto.GetPostDto;
 import com.xblog.front.post.dto.ModifyPostRequest;
@@ -19,6 +21,7 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
     private final CategoryService categoryService;
+    private final CommentService commentService;
 
     private List<GetCategoryDto> getCategoryDtos(Long partyId){
         return categoryService.getCategoryList(partyId);
@@ -27,7 +30,7 @@ public class PostController {
     @GetMapping("/xblog/user/party/{partyId}/posts")
     public String getPosts(@PathVariable Long partyId, Model model) {
         List<GetCategoryDto> categoryList = getCategoryDtos(partyId);
-        List<GetPostDto> postList = postService.getPostByViews(partyId);
+        List<GetPostDto> postList = postService.getPostsByViews(partyId);
 
         model.addAttribute("partyId", partyId);
         model.addAttribute("categoryList", categoryList);
@@ -46,23 +49,25 @@ public class PostController {
         return "/user/post";
     }
 
-    @GetMapping("/xblog/user/party/{partyName}/post/{postId}")
-    public String getPost(@PathVariable Long postId, Model model) {
-        GetPostDto dto = postService.getPost(postId);
-        model.addAttribute("post", dto);
-        return "";
-    }
+    @GetMapping("/xblog/user/party/{partyId}/post/{postId}")
+    public String getPost(@PathVariable Long partyId, @PathVariable Long postId, Model model) {
+        GetPostDto postDto = postService.getPost(postId);
+        GetCategoryDto categoryDto = categoryService.getCategory(postDto.getCategoryId());
+        List<GetCommentDto> commentList = commentService.getCommentsByPostId(postId);
 
-    @GetMapping("/post/create")
-    public String createPost(AddPostDto addPostDto) {
-        return "/postMaker";
+        model.addAttribute("post", postDto);
+        model.addAttribute("category", categoryDto);
+        model.addAttribute("commentList", commentList);
+
+        model.addAttribute("partyId", partyId);
+        model.addAttribute("postId", postId);
+        return "/user/postNote";
     }
 
     @PostMapping("/xblog/user/party/{partyId}/post/create")
-    public String createPost(AddPostDto addPostDto, Model model){
-        AddPostDto dto = postService.addPost(addPostDto);
-        model.addAttribute("post", dto);
-        return "";
+    public String createPost(AddPostDto addPostDto){
+        postService.addPost(addPostDto);
+        return "redirect:/xblog/user/party/{partyId}/posts";
     }
 
     @PutMapping("/xblog/user/party/{partyName}/post/modify/{postId}")
