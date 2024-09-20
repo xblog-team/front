@@ -38,4 +38,17 @@ public class CategoryAdaptorImpl implements CategoryAdaptor {
                 });
         return exchange.getBody();
     }
+
+    @Override
+    public GetCategoryDto getCategory(Long categoryId) {
+        HttpHeaders headers = makeHeaders();
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<GetCategoryDto> exchange = restTemplate.exchange(
+                gatewayDomain + "/api/categories/" + categoryId,
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<>() {
+                });
+        return exchange.getBody();
+    }
 }
