@@ -17,4 +17,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List<GetCategoryDto> getCategoryList(Long partyId) {
         return categoryAdaptor.getCategories(partyId);
     }
+
+    @Override
+    public GetCategoryDto getCategory(Long categoryId) {
+        return categoryAdaptor.getCategory(categoryId);
+    }
 }
