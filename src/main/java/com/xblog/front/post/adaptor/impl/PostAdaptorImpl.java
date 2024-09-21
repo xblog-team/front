@@ -32,11 +32,24 @@ public class PostAdaptorImpl implements PostAdaptor {
     }
 
     @Override
-    public List<GetPostDto> getPostListByViews(Long partyId) {
+    public List<GetPostDto> getPostListByLatest(Long partyId) {
         HttpHeaders headers = makeHeaders();
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<List<GetPostDto>> exchange = restTemplate.exchange(
                 gatewayDomain + "/api/posts/all/" + partyId,
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<>() {
+                });
+        return exchange.getBody();
+    }
+
+    @Override
+    public List<GetPostDto> getPostListByViews(Long partyId) {
+        HttpHeaders headers = makeHeaders();
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<List<GetPostDto>> exchange = restTemplate.exchange(
+                gatewayDomain + "/api/posts/post-views/" + partyId,
                 HttpMethod.GET,
                 entity,
                 new ParameterizedTypeReference<>() {
