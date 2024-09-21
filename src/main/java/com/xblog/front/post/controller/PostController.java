@@ -28,7 +28,18 @@ public class PostController {
     }
 
     @GetMapping("/xblog/user/party/{partyId}/posts")
-    public String getPosts(@PathVariable Long partyId, Model model) {
+    public String getPostsByLatest(@PathVariable Long partyId, Model model){
+        List<GetCategoryDto> categoryList = getCategoryDtos(partyId);
+        List<GetPostDto> postList = postService.getPostsByLatest(partyId);
+
+        model.addAttribute("partyId", partyId);
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("postList", postList);
+        return "/user/post";
+    }
+
+    @GetMapping("/xblog/user/party/{partyId}/posts/views")
+    public String getPostsByViews(@PathVariable Long partyId, Model model) {
         List<GetCategoryDto> categoryList = getCategoryDtos(partyId);
         List<GetPostDto> postList = postService.getPostsByViews(partyId);
 
@@ -39,7 +50,7 @@ public class PostController {
     }
 
     @GetMapping("/xblog/user/party/{partyId}/category/{categoryId}")
-    public String getPostByCategory(@PathVariable Long partyId, @PathVariable Long categoryId, Model model) {
+    public String getPostsByCategory(@PathVariable Long partyId, @PathVariable Long categoryId, Model model) {
         List<GetCategoryDto> categoryList = getCategoryDtos(partyId);
         List<GetPostDto> postList = postService.getPostList(categoryId);
 
