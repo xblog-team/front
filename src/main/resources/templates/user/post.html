@@ -49,7 +49,7 @@
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item">
-                                            <a class="text-muted text-decoration-none" th:href="@{/xblog/user/party/{partyId}/posts(partyId=${partyId})}">Home</a>
+                                            <a class="text-muted text-decoration-none" th:href="@{/xblog/user/party/{partyId}/posts(partyId=${partyId})}" id="home">Home</a>
                                         </li>
                                         <li class="breadcrumb-item" aria-current="page">Notes</li>
                                     </ol>
@@ -90,7 +90,7 @@
                       justify-content-center
                       px-3 px-md-3
                       me-0 me-md-2 text-body-color
-                    " th:id="category+${categoryId}">
+                    " th:id="category+${category.categoryId}">
                             <i class="ti ti-clipboard fill-white"></i>
                             <span class="d-none d-md-block font-weight-medium" th:text="${category.categoryName}"></span>
                         </a>
@@ -226,34 +226,35 @@
     });
 </script>
 <script defer>
-        ulQuery = document.querySelector("ul");
-        console.log(ulQuery);
+    ulQuery = document.querySelector("ul");
 
-        liQuerys = ulQuery.querySelectorAll("li");
-        console.log("liQuerys: " + liQuerys);
+    liQuerys = ulQuery.querySelectorAll("li");
 
-        liQuerys.forEach(liQuery => {
-            // let liChild = liQuery.firstElementChild;
-            console.log('li : ' +liQuery.firstElementChild.classList);
-            // if(liQuery.classList.contains('active')) {
-            //     console.log('active remove');
-            //     liQuery.classList.remove('active');
-            // }
-            liQuery.addEventListener('click', function () {
-                console.log('click : ' +liQuery);
-                try {
-                    // liQuery.forEach(li => li.firstElementChild.classList.remove('active'));
-                    console.log(liQuery.firstElementChild.classList)
-                    liQuery.firstElementChild.classList.add('active');
-                    console.log(liQuery.firstElementChild.classList);
-                } catch (e) {
-                    console.log(e);
-                }
-                // if (!liChild.classList.contains('active')) {
-                //     console.log('active add');
-                // }
-            });
-        })
+    liQuerys.forEach(liQuery => {
+        console.log('id: ' + liQuery.firstElementChild.id);
+        console.log('li : ' +liQuery.firstElementChild.classList);
+
+        const activeId = localStorage.getItem('activeLi');
+        if(activeId) {
+            const activeLi = document.getElementById(activeId);
+            if(activeLi) {
+                activeLi.classList.add('active');
+                console.log('activeLi: '+ document.getElementById(activeId).classList);
+            }
+        }
+
+        liQuery.addEventListener('click', function () {
+            console.log('click : ' +liQuery);
+            localStorage.setItem('activeLi', liQuery.firstElementChild.id);
+        });
+    })
+
+    const home = document.getElementById('home');
+
+    home.addEventListener('click', function () {
+        localStorage.setItem('activeLi', 'all-category');
+    })
+
 </script>
 
 </body></html>
