@@ -103,19 +103,20 @@
                         <div class="card-body p-4">
                           <h5 class="card-title fw-semibold">개인정보 변경</h5>
                           <p class="card-subtitle mb-4">개인정보 변경 원하시는 경우, 칸에 입력하여 저장해주세요.</p>
-                          <form>
+                          <form action="/api/user/change-nickname" method="post">
+                            <input type="hidden" name="_method" value="put">
                             <div class="row">
                               <div class="col-lg-6">
                                 <div class="mb-3">
                                   <label for="nickname" class="form-label">닉네임</label>
-                                  <input type="text" class="form-control" id="nickname">
+                                  <input type="text" class="form-control" id="nickname" name="newNickname" th:value="${nickname}" required>
                                 </div>
                               </div>
                               
                               <div class="col-12">
                                 <div class="d-flex align-items-center justify-content-end mt-4 gap-6">
-                                  <button class="btn btn-primary">저장</button>
-                                  <button class="btn bg-danger-subtle text-danger">취소</button>
+                                  <button class="btn btn-primary" type="submit">저장</button>
+                                  <button class="btn bg-danger-subtle text-danger" type="reset">취소</button>
                                 </div>
                               </div>
                             </div>

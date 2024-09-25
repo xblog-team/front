@@ -44,4 +44,18 @@ public class UserAdaptorImpl implements UserAdaptor{
         );
         
     }
+
+    @Override
+    public String getCurrentNickname(String userId) {
+        HttpHeaders headers = makeHeaders();
+        headers.set("X-USER-ID", userId);
+        HttpEntity<Void> httpEntity = new HttpEntity<>(headers);
+
+        return restTemplate.exchange(
+            gatewayDomain + USER_URL + "/nickname",
+            HttpMethod.GET,
+            httpEntity,
+            String.class
+        ).getBody();
+    }
 }
