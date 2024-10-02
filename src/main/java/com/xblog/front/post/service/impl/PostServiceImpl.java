@@ -27,8 +27,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<GetPostDto> getPostList(Long categoryId) {
-        return postAdaptor.getPostList(categoryId);
+    public List<GetPostDto> getPostListByCategory(Long categoryId) {
+        return postAdaptor.getPostListByCategory(categoryId);
+    }
+
+    @Override
+    public List<GetPostDto> getPostListByCategoryAndViews(Long categoryId) {
+        return postAdaptor.getPostListByCategoryAndViews(categoryId);
     }
 
     @Override

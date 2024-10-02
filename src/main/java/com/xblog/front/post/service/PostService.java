@@ -12,7 +12,9 @@ public interface PostService {
 
     List<GetPostDto> getPostsByViews(Long partyId);
 
-    List<GetPostDto> getPostList(Long categoryId);
+    List<GetPostDto> getPostListByCategory(Long categoryId);
+
+    List<GetPostDto> getPostListByCategoryAndViews(Long categoryId);
 
     GetPostDto getPost(Long postId);
 
