@@ -42,7 +42,7 @@
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                      <a class="text-muted text-decoration-none" th:href="@{/xblog/user/party/{partyId}/posts(partyId = ${partyId})}">Home</a>
+                      <a class="text-muted text-decoration-none" th:href="@{/xblog/user/party/{partyId}/posts(partyId = ${partyId})}" id="home">Home</a>
                     </li>
 <!--                    <li class="breadcrumb-item" aria-current="page"></li>-->
                   </ol>
@@ -77,53 +77,6 @@
 <!--            <h2 class="fs-8 fw-semibold mb-3">Title of the paragraph</h2>-->
             <p class="mb-3" th:text="${post.content}">
             </p>
-<!--            <p class="mb-3">-->
-<!--              Gigure out what it is or what it can do. MTA web directory is the simplest way in which one can bid on a-->
-<!--              link, or a few links if they wish to do so. The link directory on MTA-->
-<!--            </p>-->
-<!--            <p class="text-dark mb-0"><strong>This is strong text.</strong></p>-->
-<!--            <p class="mb-0"><em>This is italic text.</em></p>-->
-<!--            <div class="border-top mt-7 pt-7">-->
-<!--              <h3 class="fw-semibold">Unorder list.</h3>-->
-<!--              <ul class="my-3 ps-4 text-dark">-->
-<!--                <li class="d-flex align-items-center gap-2"><span class="p-1 text-bg-dark rounded-circle"></span>-->
-<!--                  Gigure-->
-<!--                  out what it is or</li>-->
-<!--                <li class="d-flex align-items-center gap-2"><span class="p-1 text-bg-dark rounded-circle"></span> The-->
-<!--                  links-->
-<!--                  it currently</li>-->
-<!--                <li class="d-flex align-items-center gap-2"><span class="p-1 text-bg-dark rounded-circle"></span> It-->
-<!--                  allows-->
-<!--                  you to start your bid</li>-->
-<!--                <li class="d-flex align-items-center gap-2"><span class="p-1 text-bg-dark rounded-circle"></span>-->
-<!--                  Gigure-->
-<!--                  out what it is or</li>-->
-<!--                <li class="d-flex align-items-center gap-2"><span class="p-1 text-bg-dark rounded-circle"></span> The-->
-<!--                  links-->
-<!--                  it currently</li>-->
-<!--                <li class="d-flex align-items-center gap-2"><span class="p-1 text-bg-dark rounded-circle"></span> It-->
-<!--                  allows-->
-<!--                  you to start your bid</li>-->
-<!--              </ul>-->
-<!--            </div>-->
-<!--            <div class="border-top mt-7 pt-7">-->
-<!--              <h3 class="fw-semibold">Order list.</h3>-->
-<!--              <ol class="my-3 text-dark">-->
-<!--                <li>Gigure out what it is or</li>-->
-<!--                <li>The links it currently</li>-->
-<!--                <li>It allows you to start your bid</li>-->
-<!--                <li>Gigure out what it is or</li>-->
-<!--                <li>The links it currently</li>-->
-<!--                <li>It allows you to start your bid</li>-->
-<!--              </ol>-->
-<!--            </div>-->
-<!--            <div class="border-top mt-7 pt-7">-->
-<!--              <h3 class="fw-semibold">Quotes</h3>-->
-<!--              <div class="p-3 bg-light rounded border-start border-2 border-primary">-->
-<!--                <h6 class="mb-0 fs-4 fw-semibold"><i class="ti ti-quote fs-7"></i>Life is short, Smile while you still-->
-<!--                  have teeth!</h6>-->
-<!--              </div>-->
-<!--            </div>-->
           </div>
         </div>
         <div class="card">
@@ -354,6 +307,12 @@
 
 <!-- solar icons -->
 <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+<script>
+  const home = document.getElementById('home');
 
+  home.addEventListener('click', function () {
+    localStorage.setItem('activeLi', 'all-category');
+  })
+</script>
 
 </body></html>
