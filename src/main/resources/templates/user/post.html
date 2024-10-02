@@ -109,7 +109,7 @@
                                 <li><a class="dropdown-item" id="post-views" th:href="@{/xblog/user/party/{partyId}/category/{categoryId}/views(partyId=${partyId}, categoryId=${categoryId})}">조회순</a></li>
                             </ul>
                         </div>
-                        <a href="javascript:void(0)" class="btn btn-primary d-flex align-items-center px-3 gap-6" id="add-notes">
+                        <a class="btn btn-primary d-flex align-items-center px-3 gap-6" id="add-notes">
                             <i class="ti ti-file fs-4"></i>
                             <span class="d-none d-md-block font-weight-medium fs-3">Add Notes</span>
                         </a>
@@ -129,7 +129,7 @@
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="d-flex align-items-center gap-2">
                                             <i class="ti ti-eye text-dark fs-5"></i>
-                                            <span th:text="${post.views}">35</span>
+                                            <span th:text="${post.views}"></span>
                                         </div>
                                         <div class="d-flex align-items-center gap-2">
 <!--                                            <i class="ti ti-message-2 text-dark fs-5"></i>-->
