@@ -65,7 +65,7 @@
                 </div>
 
                 <ul class="nav nav-pills p-3 mb-3 rounded align-items-center card flex-row">
-                    <li class="category nav-item">
+                    <li class="category-selection nav-item">
                         <a th:href="@{/xblog/user/party/{partyId}/posts(partyId=${partyId})}" class="
                       nav-link
                      gap-6
@@ -80,7 +80,7 @@
                             <span class="d-none d-md-block font-weight-medium">All Notes</span>
                         </a>
                     </li>
-                    <li class="category nav-item" th:each="category:${categoryList}">
+                    <li class="category-selection nav-item" th:each="category:${categoryList}">
                         <a th:href="@{/xblog/user/party/{partyId}/category/{categoryId}(partyId=${partyId},categoryId=${category.categoryId})}" class="
                       nav-link
                     gap-6
@@ -233,9 +233,7 @@
     });
 </script>
 <script defer>
-    ulQuery = document.querySelector("ul");
-
-    liQuerys = ulQuery.querySelectorAll("li" && '.category');
+    liQuerys = document.querySelectorAll('.category-selection');
 
     liQuerys.forEach(liQuery => {
         console.log('id: ' + liQuery.firstElementChild.id);
