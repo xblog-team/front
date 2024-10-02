@@ -20,7 +20,7 @@ import java.util.List;
 public class PostAdaptorImpl implements PostAdaptor {
     private final RestTemplate restTemplate;
 
-    @Value("http://localhost:8090")
+    @Value("${gateway.api.url}")
     String gatewayDomain;
 
 
@@ -58,12 +58,26 @@ public class PostAdaptorImpl implements PostAdaptor {
     }
 
     @Override
-    public List<GetPostDto> getPostList(Long categoryId) {
+    public List<GetPostDto> getPostListByCategory(Long categoryId) {
         HttpHeaders headers = makeHeaders();
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<List<GetPostDto>> exchange = restTemplate.exchange(
                 gatewayDomain + "/api/posts/post-categories/" + categoryId,
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<>() {
+                });
+        return exchange.getBody();
+    }
+
+    @Override
+    public List<GetPostDto> getPostListByCategoryAndViews(Long categoryId) {
+        HttpHeaders headers = makeHeaders();
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<List<GetPostDto>> exchange = restTemplate.exchange(
+                gatewayDomain + "/api/posts/post-categories/" + categoryId +"/views",
                 HttpMethod.GET,
                 entity,
                 new ParameterizedTypeReference<>() {
