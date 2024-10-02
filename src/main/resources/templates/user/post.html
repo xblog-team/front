@@ -65,7 +65,7 @@
                 </div>
 
                 <ul class="nav nav-pills p-3 mb-3 rounded align-items-center card flex-row">
-                    <li class="nav-item">
+                    <li class="category nav-item">
                         <a th:href="@{/xblog/user/party/{partyId}/posts(partyId=${partyId})}" class="
                       nav-link
                      gap-6
@@ -80,7 +80,7 @@
                             <span class="d-none d-md-block font-weight-medium">All Notes</span>
                         </a>
                     </li>
-                    <li class="nav-item"  th:each="category:${categoryList}">
+                    <li class="category nav-item" th:each="category:${categoryList}">
                         <a th:href="@{/xblog/user/party/{partyId}/category/{categoryId}(partyId=${partyId},categoryId=${category.categoryId})}" class="
                       nav-link
                     gap-6
@@ -95,7 +95,20 @@
                             <span class="d-none d-md-block font-weight-medium" th:text="${category.categoryName}"></span>
                         </a>
                     </li>
-                    <li class="nav-item ms-auto">
+                    <li class="nav-item ms-auto d-flex align-items-center gap-2">
+                        <div class="btn-group">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                순서 종류
+                            </button>
+                            <ul th:if="${categoryId} == 'all-category'" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" id="post-latest" th:href="@{/xblog/user/party/{partyId}/posts(partyId=${partyId})}">최신순</a></li>
+                                <li><a class="dropdown-item" id="post-views" th:href="@{/xblog/user/party/{partyId}/posts/views(partyId=${partyId})}">조회순</a></li>
+                            </ul>
+                            <ul th:unless="${categoryId} == 'all-category'" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" id="post-latest" th:href="@{/xblog/user/party/{partyId}/category/{categoryId}(partyId=${partyId}, categoryId=${categoryId})}">최신순</a></li>
+                                <li><a class="dropdown-item" id="post-views" th:href="@{/xblog/user/party/{partyId}/category/{categoryId}/views(partyId=${partyId}, categoryId=${categoryId})}">조회순</a></li>
+                            </ul>
+                        </div>
                         <a href="javascript:void(0)" class="btn btn-primary d-flex align-items-center px-3 gap-6" id="add-notes">
                             <i class="ti ti-file fs-4"></i>
                             <span class="d-none d-md-block font-weight-medium fs-3">Add Notes</span>
@@ -106,7 +119,7 @@
                     <div id="note-full-container" class="note-has-grid row">
                         <div class="col-md-4 single-note-item all-category" th:each="post:${postList}">
                             <div class="card card-body">
-                                <a th:href="@{/xblog/user/party/{partyId}/post/{postId}(partyId = ${partyId}, postId = ${post.postId})}">
+                                <a th:href="@{/xblog/user/party/{partyId}/posts/{postId}(partyId = ${partyId}, postId = ${post.postId})}">
                                     <span class="side-stick"></span>
                                     <h6 class="note-title text-truncate w-75 mb-0" th:text="${post.title}" data-noteheading="title"></h6>
                                     <!--                                <p class="note-date fs-2">11 March 2009</p>-->
@@ -194,7 +207,7 @@
 <script src="/assets/libs/fullcalendar/index.global.min.js"></script>
 <!--<script src="/assets/js/apps/notes.js"></script>-->
 
-<script async>
+<script defer>
     const title = document.getElementById("note-title");
     const addButton = document.getElementById("btn-n-add");
 
@@ -207,11 +220,6 @@
         }
     });
 
-    // addButton.addEventListener('click', function () {
-    //     const formList = document.getElementById("addnotesmodalForm");
-    //
-    // })
-
 </script>
 
 <script defer>
@@ -221,33 +229,29 @@
 
     $("#add-notes").on("click", function () {
         $("#addnotesmodal").modal("show");
-        // $("#btn-n-save").hide();
         $("#btn-n-add").show();
     });
 </script>
 <script defer>
     ulQuery = document.querySelector("ul");
 
-    liQuerys = ulQuery.querySelectorAll("li");
+    liQuerys = ulQuery.querySelectorAll("li" && '.category');
 
     liQuerys.forEach(liQuery => {
         console.log('id: ' + liQuery.firstElementChild.id);
         console.log('li : ' +liQuery.firstElementChild.classList);
 
-        const activeId = localStorage.getItem('activeLi');
-        if(activeId) {
-            const activeLi = document.getElementById(activeId);
-            if(activeLi) {
-                activeLi.classList.add('active');
-                console.log('activeLi: '+ document.getElementById(activeId).classList);
-            }
-        }
-
         liQuery.addEventListener('click', function () {
             console.log('click : ' +liQuery);
+
             localStorage.setItem('activeLi', liQuery.firstElementChild.id);
         });
     })
+
+    const activeLi = document.getElementById(localStorage.getItem('activeLi'));
+    if(activeLi) {
+        activeLi.classList.add('active');
+    }
 
     const home = document.getElementById('home');
 
