@@ -17,7 +17,7 @@ import java.util.List;
 public class CommentAdaptorImpl implements CommentAdaptor {
     private final RestTemplate restTemplate;
 
-    @Value("http://localhost:8090")
+    @Value("${gateway.api.url}")
     String gatewayDomain;
 
     public HttpHeaders makeHeaders() {

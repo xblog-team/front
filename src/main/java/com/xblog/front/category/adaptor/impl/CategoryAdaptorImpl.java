@@ -16,7 +16,7 @@ import java.util.List;
 public class CategoryAdaptorImpl implements CategoryAdaptor {
     private final RestTemplate restTemplate;
 
-    @Value("http://localhost:8090")
+    @Value("${gateway.api.url}")
     String gatewayDomain;
 
     public HttpHeaders makeHeaders() {
