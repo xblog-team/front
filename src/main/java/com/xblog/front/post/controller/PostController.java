@@ -7,7 +7,6 @@ import com.xblog.front.comment.service.CommentService;
 import com.xblog.front.post.dto.AddPostDto;
 import com.xblog.front.post.dto.GetPostDto;
 import com.xblog.front.post.dto.ModifyPostRequest;
-import com.xblog.front.post.dto.ModifyPostResponse;
 import com.xblog.front.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,7 +26,7 @@ public class PostController {
         return categoryService.getCategoryList(partyId);
     }
 
-    @GetMapping("/xblog/user/party/{partyId}/posts")
+        @GetMapping("/xblog/user/party/{partyId}/posts")
     public String getPostsByLatest(@PathVariable Long partyId, Model model){
         List<GetCategoryDto> categoryList = getCategoryDtos(partyId);
         List<GetPostDto> postList = postService.getPostsByLatest(partyId);
@@ -35,6 +34,7 @@ public class PostController {
         model.addAttribute("partyId", partyId);
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("postList", postList);
+        model.addAttribute("categoryId", "all-category");
         return "/user/post";
     }
 
@@ -46,21 +46,35 @@ public class PostController {
         model.addAttribute("partyId", partyId);
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("postList", postList);
+        model.addAttribute("categoryId", "all-category");
         return "/user/post";
     }
 
     @GetMapping("/xblog/user/party/{partyId}/category/{categoryId}")
     public String getPostsByCategory(@PathVariable Long partyId, @PathVariable Long categoryId, Model model) {
         List<GetCategoryDto> categoryList = getCategoryDtos(partyId);
-        List<GetPostDto> postList = postService.getPostList(categoryId);
+        List<GetPostDto> postList = postService.getPostListByCategory(categoryId);
 
         model.addAttribute("partyId", partyId);
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("postList", postList);
+        model.addAttribute("categoryId", categoryId);
         return "/user/post";
     }
 
-    @GetMapping("/xblog/user/party/{partyId}/post/{postId}")
+    @GetMapping("/xblog/user/party/{partyId}/category/{categoryId}/views")
+    public String getPostsByCategoryAndViews(@PathVariable Long partyId, @PathVariable Long categoryId, Model model) {
+        List<GetCategoryDto> categoryList = getCategoryDtos(partyId);
+        List<GetPostDto> postList = postService.getPostListByCategoryAndViews(categoryId);
+
+        model.addAttribute("partyId", partyId);
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("postList", postList);
+        model.addAttribute("categoryId", categoryId);
+        return "/user/post";
+    }
+
+    @GetMapping("/xblog/user/party/{partyId}/posts/{postId}")
     public String getPost(@PathVariable Long partyId, @PathVariable Long postId, Model model) {
         GetPostDto postDto = postService.getPost(postId);
         GetCategoryDto categoryDto = categoryService.getCategory(postDto.getCategoryId());
@@ -75,21 +89,21 @@ public class PostController {
         return "/user/postNote";
     }
 
-    @PostMapping("/xblog/user/party/{partyId}/post/create")
+    @PostMapping("/xblog/user/party/{partyId}/posts/create")
     public String createPost(AddPostDto addPostDto){
         postService.addPost(addPostDto);
         return "redirect:/xblog/user/party/{partyId}/posts";
     }
 
-    @PutMapping("/xblog/user/party/{partyName}/post/modify/{postId}")
+    @PostMapping("/xblog/user/party/{partyId}/posts/modify/{postId}")
     public String modifyPost(ModifyPostRequest request, @PathVariable Long postId) {
-        ModifyPostResponse response = postService.modifyPost(request, postId);
-        return "";
+        postService.modifyPost(request, postId);
+        return "redirect:/xblog/user/party/{partyId}/posts/{postId}";
     }
 
-    @DeleteMapping("/xblog/user/party/{partyName}/post/delete/{postId}")
+    @PostMapping("/xblog/user/party/{partyId}/posts/delete/{postId}")
     public String deletePost(@PathVariable Long postId) {
         postService.deletePost(postId);
-        return "";
+        return "redirect:/xblog/user/party/{partyId}/posts";
     }
 }
