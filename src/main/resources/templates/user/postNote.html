@@ -63,7 +63,8 @@
             <div>
               <ul class="nav">
                 <li class="nav-item">
-                  <span class="badge text-bg-light fs-2 rounded-4 py-1 px-2" th:text="'<'+${category.categoryName}+'>'"></span>
+                  <a class="badge text-bg-light rounded-4 fs-3" th:href="@{/xblog/user/party/{partyId}/category/{categoryId}(partyId=${partyId}, categoryId=${category.categoryId})}" th:text="'<'+${category.categoryName}+'>'"></a>
+                  <span class="mx-3 p-1 text-bg-light rounded-4 fs-3" th:text="'작성자 : '+${post.userId}"></span>
                 </li>
                 <li class="nav-item ms-auto d-flex gap-2">
                   <form method="post" th:action="@{/xblog/user/party/{partyId}/posts/modify/{postId}(partyId=${partyId}, postId=${postId})}">
@@ -75,7 +76,7 @@
                 </li>
               </ul>
             </div>
-            <h2 class="fs-9 fw-semibold my-4" th:text="${post.title}"></h2>
+            <h2 class="fs-9 fw-semibold my-2" th:text="${post.title}"></h2>
             <div class="d-flex align-items-center gap-4">
               <div class="d-flex align-items-center gap-2">
                 <i class="ti ti-eye text-dark fs-5"></i>
