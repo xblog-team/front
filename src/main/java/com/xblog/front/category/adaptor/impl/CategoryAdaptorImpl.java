@@ -11,6 +11,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+/**
+ * category 관련 adaptor
+ * @author jihyeon
+ */
 @Component
 @RequiredArgsConstructor
 public class CategoryAdaptorImpl implements CategoryAdaptor {
@@ -19,6 +23,10 @@ public class CategoryAdaptorImpl implements CategoryAdaptor {
     @Value("${gateway.api.url}")
     String gatewayDomain;
 
+    /**
+     * APPLICATION_JSON으로 contentType과 accept 설정한 HttpHeaders를 만드는 method
+     * @return HttpHeaders
+     */
     public HttpHeaders makeHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -26,6 +34,11 @@ public class CategoryAdaptorImpl implements CategoryAdaptor {
         return headers;
     }
 
+    /**
+     * 특정 그룹에 속한 모든 카테고리들을 조회하는 요청을 gateway에 전달
+     * @param partyId 그룹 아이디
+     * @return categoryId, categoryName, partyId로 구성된 dto 리스트
+     */
     @Override
     public List<GetCategoryDto> getCategories(Long partyId) {
         HttpHeaders headers = makeHeaders();
@@ -39,6 +52,11 @@ public class CategoryAdaptorImpl implements CategoryAdaptor {
         return exchange.getBody();
     }
 
+    /**
+     * 특정 카테고리를 조회하는 요청을 gateway에 전달
+     * @param categoryId 카테고리 아이디
+     * @return categoryId, categoryName, partyId로 구성된 dto 리스트
+     */
     @Override
     public GetCategoryDto getCategory(Long categoryId) {
         HttpHeaders headers = makeHeaders();
