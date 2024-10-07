@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicon icon-->
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+
+  <!-- Core Css -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+
+  <title>Modernize Bootstrap Admin</title>
+</head>
+
+<body>
+  <div class="preloader">
+    <img src="../assets/images/logos/favicon.png" alt="loader" class="lds-ripple img-fluid" />
+  </div>
+  <div id="main-wrapper">
+      <div class="body-wrapper">
+        <div class="container-fluid">
+          <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
+            <div class="card-body px-4 py-3">
+              <div class="row align-items-center">
+                <div class="col-9">
+                  <h4 class="fw-semibold mb-8">계정 설정</h4>
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a class="text-muted text-decoration-none" href="../main/index.html">홈</a>
+                      </li>
+                      <li class="breadcrumb-item" aria-current="page">계정 설정</li>
+                    </ol>
+                  </nav>
+                </div>
+                <div class="col-3">
+                  <div class="text-center mb-n5">
+                    <img src="../assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <ul class="nav nav-pills user-profile-tab" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link position-relative rounded-0 active d-flex align-items-center justify-content-center bg-transparent fs-3 py-4"
+                  id="pills-account-tab" data-bs-toggle="pill" data-bs-target="#pills-account" type="button" role="tab"
+                  aria-controls="pills-account" aria-selected="true">
+                  <i class="ti ti-user-circle me-2 fs-6"></i>
+                  <span class="d-none d-md-block">계정</span>
+                </button>
+              </li>
+            </ul>
+            <div class="card-body">
+              <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-account" role="tabpanel"
+                  aria-labelledby="pills-account-tab" tabindex="0">
+                  <div class="row">
+                    <!-- 비밀번호 변경 칸 -->
+                    <div class="col-lg-6 d-flex align-items-stretch">
+                      <div class="card w-100 position-relative overflow-hidden">
+                        <div class="card-body p-4">
+                          <h5 class="card-title fw-semibold">비밀번호 변경</h5>
+                          <p class="card-subtitle mb-4">비밀번호 변경해주세요.</p>
+                          <form action="/api/user/change-password" method="post">
+                            <input type="hidden" name="_method" value="put">
+                            <div class="mb-3">
+                              <label for="exampleInputPassword1" class="form-label">현재 비밀번호</label>
+                              <input type="password" class="form-control" id="oldPassword"
+                                value="12345678910">
+                            </div>
+                            <div class="mb-3">
+                              <label for="exampleInputPassword2" class="form-label">새 비밀번호</label>
+                              <input type="password" class="form-control" id="newPassword"
+                                value="12345678910">
+                            </div>
+                            <div>
+                              <label for="exampleInputPassword3" class="form-label">새 비밀번호 확인</label>
+                              <input type="password" class="form-control" id="newPassword"
+                                value="12345678910">
+                            </div>
+                            <div class="row">
+                              <div class="col-12">
+                                <div class="d-flex align-items-center justify-content-end mt-4 gap-6">
+                                  <button class="btn btn-primary" type="submit">저장</button>
+                                  <button class="btn bg-danger-subtle text-danger" type="reset">취소</button>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 닉네임 변경 칸 -->
+                    <div class="col-lg-6 d-flex align-items-stretch">
+                      <div class="card w-100 position-relative overflow-hidden">
+                        <div class="card-body p-4">
+                          <h5 class="card-title fw-semibold">개인정보 변경</h5>
+                          <p class="card-subtitle mb-4">개인정보 변경 원하시는 경우, 칸에 입력하여 저장해주세요.</p>
+                          <form action="/api/user/change-nickname" method="post">
+                            <input type="hidden" name="_method" value="put">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="mb-3">
+                                  <label for="nickname" class="form-label">닉네임</label>
+                                  <input type="text" class="form-control" id="nickname" name="newNickname" th:value="${nickname}" required>
+                                </div>
+                              </div>
+                              
+                              <div class="col-12">
+                                <div class="d-flex align-items-center justify-content-end mt-4 gap-6">
+                                  <button class="btn btn-primary" type="submit">저장</button>
+                                  <button class="btn bg-danger-subtle text-danger" type="reset">취소</button>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        function handleColorTheme(e) {
+          $("html").attr("data-color-theme", e);
+          $(e).prop("checked", !0);
+        }
+      </script>
+
+  </div>
+  <div class="dark-transparent sidebartoggler"></div>
+  <!-- Import Js Files -->
+  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+  <script src="../assets/js/theme/app.init.js"></script>
+  <script src="../assets/js/theme/theme.js"></script>
+  <script src="../assets/js/theme/app.min.js"></script>
+  <script src="../assets/js/theme/sidebarmenu.js"></script>
+
+  <!-- solar icons -->
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+</body>
+
+</html>
