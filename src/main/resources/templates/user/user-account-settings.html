@@ -63,32 +63,34 @@
                 <div class="tab-pane fade show active" id="pills-account" role="tabpanel"
                   aria-labelledby="pills-account-tab" tabindex="0">
                   <div class="row">
+                    <!-- 비밀번호 변경 칸 -->
                     <div class="col-lg-6 d-flex align-items-stretch">
                       <div class="card w-100 position-relative overflow-hidden">
                         <div class="card-body p-4">
                           <h5 class="card-title fw-semibold">비밀번호 변경</h5>
                           <p class="card-subtitle mb-4">비밀번호 변경해주세요.</p>
-                          <form>
+                          <form action="/api/user/change-password" method="post">
+                            <input type="hidden" name="_method" value="put">
                             <div class="mb-3">
                               <label for="exampleInputPassword1" class="form-label">현재 비밀번호</label>
-                              <input type="password" class="form-control" id="exampleInputPassword1"
+                              <input type="password" class="form-control" id="oldPassword"
                                 value="12345678910">
                             </div>
                             <div class="mb-3">
                               <label for="exampleInputPassword2" class="form-label">새 비밀번호</label>
-                              <input type="password" class="form-control" id="exampleInputPassword2"
+                              <input type="password" class="form-control" id="newPassword"
                                 value="12345678910">
                             </div>
                             <div>
                               <label for="exampleInputPassword3" class="form-label">새 비밀번호 확인</label>
-                              <input type="password" class="form-control" id="exampleInputPassword3"
+                              <input type="password" class="form-control" id="newPassword"
                                 value="12345678910">
                             </div>
                             <div class="row">
                               <div class="col-12">
                                 <div class="d-flex align-items-center justify-content-end mt-4 gap-6">
-                                  <button class="btn btn-primary">저장</button>
-                                  <button class="btn bg-danger-subtle text-danger">취소</button>
+                                  <button class="btn btn-primary" type="submit">저장</button>
+                                  <button class="btn bg-danger-subtle text-danger" type="reset">취소</button>
                                 </div>
                               </div>
                             </div>
