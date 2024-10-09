@@ -1,0 +1,108 @@
+<!--<!DOCTYPE html>-->
+<html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="horizontal" data-boxed-layout="boxed" data-card="shadow"
+      xmlns:th="http://www.thymeleaf.org"><head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon icon-->
+    <link rel="shortcut icon" type="image/png" href="/assets/images/logos/favicon.png">
+
+    <!-- Core Css -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
+
+    <title>Modernize Bootstrap Admin</title>
+</head>
+
+<body data-sidebartype="mini-sidebar">
+<div class="toast toast-onload align-items-center text-bg-primary border-0 fade hide" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body hstack align-items-start gap-6">
+        <i class="ti ti-alert-circle fs-6"></i>
+        <div>
+            <h5 class="text-white fs-3 mb-1">Welcome to Modernize</h5>
+            <h6 class="text-white fs-2 mb-0">Easy to costomize the Template!!!</h6>
+        </div>
+        <button type="button" class="btn-close btn-close-white fs-2 m-0 ms-auto shadow-none" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+<!-- Preloader -->
+<div class="preloader" style="display: none;">
+    <img src="/assets/images/logos/favicon.png" alt="loader" class="lds-ripple img-fluid">
+</div>
+<div id="main-wrapper">
+    <div class="page-wrapper">
+        <div style="padding-top: 100px">
+            <div class="container-fluid">
+                <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
+                    <div class="card-body px-4 py-3">
+                        <div class="row align-items-center">
+                            <div class="col-9">
+                                <h4 class="fw-semibold mb-8">Post</h4>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a class="text-muted text-decoration-none" th:href="@{/xblog/user/party/{partyId}/posts(partyId = ${partyId})}" id="home">Home</a>
+                                        </li>
+                                        <!--                    <li class="breadcrumb-item" aria-current="page"></li>-->
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div class="col-3">
+                                <div class="text-center mb-n5">
+                                    <img src="/assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="card rounded-2 overflow-hidden">
+                    <div class="card-body p-4">
+                        <div>
+                            <ul class="nav">
+                                <li class="nav-item">
+<!--                                    <a class="badge text-bg-light rounded-4 fs-3" th:href="@{/xblog/user/party/{partyId}/category/{categoryId}(partyId=${partyId}, categoryId=${post.categoryId})}" th:text="'<'+${category.categoryName}+'>'"></a>-->
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group">
+                            <input class="fs-9 fw-semibold my-2" id="title" th:value="${post.title}">
+                        </div>
+                        <div class="d-flex align-items-center gap-4">
+<!--                            <div class="d-flex align-items-center gap-2">-->
+<!--                                <i class="ti ti-eye text-dark fs-5"></i>-->
+<!--                                <span th:text="${post.views}"></span>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                    <div class="form-group card-body border-top p-4">
+                        <!--            <h2 class="fs-8 fw-semibold mb-3">Title of the paragraph</h2>-->
+                        <textarea class="form-control" rows="3" th:value="${post.content}">
+                        </textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dark-transparent sidebartoggler"></div>
+<!-- Import Js Files -->
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/libs/simplebar/dist/simplebar.min.js"></script>
+<script src="/assets/js/theme/app.horizontal.init.js"></script>
+<script src="/assets/js/theme/theme.js"></script>
+<script src="/assets/js/theme/app.min.js"></script>
+<script src="/assets/js/theme/sidebarmenu.js"></script>
+
+<!-- solar icons -->
+<script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+<script>
+    const home = document.getElementById('home');
+
+    home.addEventListener('click', function () {
+        localStorage.setItem('activeLi', 'all-category');
+    })
+</script>
+
+</body></html>
