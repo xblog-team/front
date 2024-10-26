@@ -1,0 +1,262 @@
+<html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical" data-boxed-layout="boxed" data-card="shadow"
+      xmlns:th="http://www.thymeleaf.org"><head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon icon-->
+    <link rel="shortcut icon" type="image/png" href="/assets/images/logos/favicon.png">
+
+    <!-- Core Css -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
+
+    <title>Modernize Bootstrap Admin</title>
+    <style>
+        .note-inner-content{
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: calc(100%);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body data-sidebartype="mini-sidebar">
+<!--<div class="toast toast-onload align-items-center text-bg-primary border-0 fade hide" role="alert" aria-live="assertive" aria-atomic="true">-->
+<!--    <div class="toast-body hstack align-items-start gap-6">-->
+<!--        <i class="ti ti-alert-circle fs-6"></i>-->
+<!--        <div>-->
+<!--            <h5 class="text-white fs-3 mb-1">Welcome to Modernize</h5>-->
+<!--            <h6 class="text-white fs-2 mb-0">Easy to costomize the Template!!!</h6>-->
+<!--        </div>-->
+<!--        <button type="button" class="btn-close btn-close-white fs-2 m-0 ms-auto shadow-none" data-bs-dismiss="toast" aria-label="Close"></button>-->
+<!--    </div>-->
+<!--</div>-->
+<!-- Preloader -->
+<div class="preloader" style="display: none;">
+    <img src="/assets/images/logos/favicon.png" alt="loader" class="lds-ripple img-fluid">
+</div>
+<div id="main-wrapper">
+    <div class="page-wrapper">
+        <div class="body-wrapper">
+            <div class="container-fluid">
+                <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
+                    <div class="card-body px-4 py-3">
+                        <div class="row align-items-center">
+                            <div class="col-9">
+                                <h4 class="fw-semibold mb-8">Notes</h4>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a class="text-muted text-decoration-none" th:href="@{/xblog/user/party/{partyId}/posts(partyId=${partyId})}" id="home">Home</a>
+                                        </li>
+                                        <li class="breadcrumb-item" aria-current="page">Notes</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div class="col-3">
+                                <div class="text-center mb-n5">
+                                    <img src="/assets/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="nav nav-pills p-3 mb-3 rounded align-items-center card flex-row">
+                    <li class="category-selection nav-item">
+                        <a th:href="@{/xblog/user/party/{partyId}/posts(partyId=${partyId})}" class="
+                      nav-link
+                     gap-6
+                      note-link
+                      d-flex
+                      align-items-center
+                      justify-content-center
+                      px-3 px-md-3
+                      me-0 me-md-2 text-body-color
+                    " id="all-category">
+                            <i class="ti ti-list fill-white"></i>
+                            <span class="d-none d-md-block font-weight-medium">All Notes</span>
+                        </a>
+                    </li>
+                    <li class="category-selection nav-item" th:each="category:${categoryList}">
+                        <a th:href="@{/xblog/user/party/{partyId}/category/{categoryId}(partyId=${partyId},categoryId=${category.categoryId})}" class="
+                      nav-link
+                    gap-6
+                      note-link
+                      d-flex
+                      align-items-center
+                      justify-content-center
+                      px-3 px-md-3
+                      me-0 me-md-2 text-body-color
+                    " th:id="category+${category.categoryId}">
+                            <i class="ti ti-clipboard fill-white"></i>
+                            <span class="d-none d-md-block font-weight-medium" th:text="${category.categoryName}"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-auto d-flex align-items-center gap-2">
+                        <div class="btn-group">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                순서 종류
+                            </button>
+                            <ul th:if="${categoryId} == 'all-category'" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" id="post-latest" th:href="@{/xblog/user/party/{partyId}/posts(partyId=${partyId})}">최신순</a></li>
+                                <li><a class="dropdown-item" id="post-views" th:href="@{/xblog/user/party/{partyId}/posts/views(partyId=${partyId})}">조회순</a></li>
+                            </ul>
+                            <ul th:unless="${categoryId} == 'all-category'" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" id="post-latest" th:href="@{/xblog/user/party/{partyId}/category/{categoryId}(partyId=${partyId}, categoryId=${categoryId})}">최신순</a></li>
+                                <li><a class="dropdown-item" id="post-views" th:href="@{/xblog/user/party/{partyId}/category/{categoryId}/views(partyId=${partyId}, categoryId=${categoryId})}">조회순</a></li>
+                            </ul>
+                        </div>
+                        <a class="btn btn-primary d-flex align-items-center px-3 gap-6" id="add-notes">
+                            <i class="ti ti-file fs-4"></i>
+                            <span class="d-none d-md-block font-weight-medium fs-3">Add Notes</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="note-full-container" class="note-has-grid row">
+                        <div class="col-md-4 single-note-item all-category" th:each="post:${postList}">
+                            <div class="card card-body">
+                                <a th:href="@{/xblog/user/party/{partyId}/posts/{postId}(partyId = ${partyId}, postId = ${post.postId})}">
+                                    <span class="side-stick"></span>
+                                    <h6 class="note-title text-truncate w-75 mb-0" th:text="${post.title}" data-noteheading="title"></h6>
+                                    <!--                                <p class="note-date fs-2">11 March 2009</p>-->
+                                    <div class="note-content">
+                                        <p class="note-inner-content" style="text-overflow: ellipsis; -webkit-line-clamp: 1" th:text="${post.content}"></p>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i class="ti ti-eye text-dark fs-5"></i>
+                                            <span th:text="${post.views}"></span>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+<!--                                            <i class="ti ti-message-2 text-dark fs-5"></i>-->
+<!--                                            <span th:text="${commentList.size()}"/>-->
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Add notes -->
+                <div class="modal fade" id="addnotesmodal" tabindex="-1" role="dialog" aria-labelledby="addnotesmodalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content border-0">
+                            <div class="modal-header bg-primary rounded-top">
+                                <h6 class="modal-title text-white">Add Notes</h6>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="notes-box">
+                                    <div class="notes-content">
+                                        <form th:action="@{/xblog/user/party/{partyId}/post/create(partyId=${partyId})}" method="post" id="addnotesmodalForm" onsubmit="submitMsg()">
+                                            <div class="row">
+                                                <div class="form-group mb-4">
+                                                    <label class="mr-sm-2" for="inlineFormCustomSelect">Select</label>
+                                                    <select class="form-select mr-sm-2" id="inlineFormCustomSelect">
+                                                        <option selected disabled>카테고리를 고르시오</option>
+                                                        <option th:each="category:${categoryList}" th:value="${category.categoryId}" th:text="${category.categoryName}">카테고리를 고르시오</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="note-title">
+                                                        <label class="form-label">Note Title</label>
+                                                        <input type="text" id="note-title" class="form-control" placeholder="Title">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="note-description">
+                                                        <label class="form-label">Note Description</label>
+                                                        <textarea id="content" class="form-control" placeholder="Description" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="d-flex gap-6">
+                                    <button class="btn bg-danger-subtle text-danger" data-bs-dismiss="modal">Discard</button>
+                                    <button id="btn-n-add" class="btn btn-primary" disabled="disabled" form="addnotesmodalForm">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="dark-transparent sidebartoggler"></div>-->
+<script src="/assets/js/vendor.min.js"></script>
+<!-- Import Js Files -->
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!--<script src="/assets/libs/simplebar/dist/simplebar.min.js"></script>-->
+<script src="/assets/js/theme/app.init.js"></script>
+<script src="/assets/js/theme/theme.js"></script>
+<script src="/assets/js/theme/app.min.js"></script>
+<!--<script src="/assets/js/theme/sidebarmenu.js"></script>-->
+
+<!-- solar icons -->
+<script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+<script src="/assets/libs/fullcalendar/index.global.min.js"></script>
+<!--<script src="/assets/js/apps/notes.js"></script>-->
+
+<script defer>
+    const title = document.getElementById("note-title");
+    const addButton = document.getElementById("btn-n-add");
+
+    title.addEventListener('input', function () {
+        if(title.value.trim() === "") {
+            addButton.setAttribute("disabled", "disabled");
+        } else {
+            console.log("add fff");
+            addButton.removeAttribute("disabled");
+        }
+    });
+
+</script>
+
+<script defer>
+    function submitMsg() {
+        alert("게시물 업로드가 성공적으로 완료되었습니다.");
+    }
+
+    $("#add-notes").on("click", function () {
+        $("#addnotesmodal").modal("show");
+        $("#btn-n-add").show();
+    });
+</script>
+<script defer>
+    liQuerys = document.querySelectorAll('.category-selection');
+
+    liQuerys.forEach(liQuery => {
+        console.log('id: ' + liQuery.firstElementChild.id);
+        console.log('li : ' +liQuery.firstElementChild.classList);
+
+        liQuery.addEventListener('click', function () {
+            console.log('click : ' +liQuery);
+
+            localStorage.setItem('activeLi', liQuery.firstElementChild.id);
+        });
+    })
+
+    const activeLi = document.getElementById(localStorage.getItem('activeLi'));
+    if(activeLi) {
+        activeLi.classList.add('active');
+    }
+
+    const home = document.getElementById('home');
+
+    home.addEventListener('click', function () {
+        localStorage.setItem('activeLi', 'all-category');
+    })
+
+</script>
+
+</body></html>
